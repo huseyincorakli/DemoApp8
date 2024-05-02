@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { routes } from './routes';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 import { ContactModule } from './pages/contact/contact.module';
 import { HomeModule } from './pages/home/home.module';
 import { AboutModule } from './pages/about/about.module';
+import { CustomPreloadStrategy } from './strategies/custom.strategy';
 
 
 @NgModule({
@@ -18,9 +19,10 @@ import { AboutModule } from './pages/about/about.module';
     ContactModule,
     HomeModule,
     AboutModule,
-    RouterModule.forRoot(routes)
+
+    RouterModule.forRoot(routes,{preloadingStrategy:CustomPreloadStrategy})
   ],
-  providers: [],
+  providers: [CustomPreloadStrategy],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
